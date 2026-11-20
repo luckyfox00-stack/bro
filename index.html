@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ СЕМЕЙНОЕ УВЕДОМЛЕНИЕ</title>
+    <title>🏍️ ГАРАЖ: Техосмотр</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #0a0a0a;
+            background: #1a1a1a;
             color: #e0e0e0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
@@ -17,17 +17,17 @@
             padding: 20px;
         }
         .alert-box {
-            background: #1c1c1e;
-            border: 1px solid #333;
+            background: #242424;
+            border: 2px solid #ff8c00;
             border-radius: 16px;
             padding: 30px 20px;
             max-width: 450px;
             width: 100%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 40px rgba(255, 140, 0, 0.2);
             text-align: center;
         }
         .icon { font-size: 3em; margin-bottom: 15px; }
-        h1 { color: #ff453a; font-size: 1.5em; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        h1 { color: #ff8c00; font-size: 1.5em; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
         .text { font-size: 1.05em; line-height: 1.5; margin-bottom: 25px; color: #aaa; }
         .highlight { color: #fff; font-weight: bold; }
         
@@ -44,12 +44,12 @@
             text-align: left;
         }
         .tariff-btn:hover { background: #3a3a3c; transform: scale(1.02); }
-        .tariff-title { font-weight: bold; display: block; margin-bottom: 5px; }
+        .tariff-title { font-weight: bold; display: block; margin-bottom: 5px; color: #ff8c00; }
         .tariff-desc { font-size: 0.85em; color: #888; }
 
         .terms-list {
             background: #000;
-            border: 1px solid #ff453a;
+            border: 1px solid #ff8c00;
             border-radius: 10px;
             padding: 15px;
             text-align: left;
@@ -62,7 +62,7 @@
 
         .timer {
             font-size: 1.2em;
-            color: #ff453a;
+            color: #ff8c00;
             font-weight: bold;
             margin-bottom: 15px;
             min-height: 30px;
@@ -82,8 +82,8 @@
             margin-bottom: 10px;
         }
         .final-btn.ready {
-            background: #ff453a;
-            color: #fff;
+            background: #ff8c00;
+            color: #000;
             cursor: pointer;
             animation: pulse 1s infinite;
         }
@@ -121,29 +121,30 @@
 
         .verification-box {
             background: #000;
-            border: 1px solid #007aff;
+            border: 1px solid #ff8c00;
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
         }
         .verification-box p {
-            color: #007aff;
+            color: #ff8c00;
             font-size: 1em;
             margin-bottom: 15px;
         }
         .verify-btn {
-            background: #007aff;
-            color: #fff;
+            background: #ff8c00;
+            color: #000;
             border: none;
             padding: 12px 30px;
             border-radius: 8px;
             font-size: 1em;
             cursor: pointer;
             margin: 5px;
+            font-weight: bold;
         }
 
         .certificate {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
             border: 3px solid #fff;
             border-radius: 15px;
             padding: 25px;
@@ -163,89 +164,90 @@
         }
         .stamp {
             display: inline-block;
-            background: #ff453a;
-            color: #fff;
+            background: #000;
+            color: #ff8c00;
             padding: 5px 15px;
             border-radius: 5px;
             font-size: 0.9em;
             margin-top: 10px;
             transform: rotate(-5deg);
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="alert-box">
-        <!-- Экран 1: Проверка личности -->
+        <!-- Экран 1: Вход в гараж -->
         <div id="verifyScreen">
-            <div class="icon">🔍</div>
-            <h1>Проверка личности</h1>
-            <p class="text">Система обнаружила попытку доступа к семейному чату. Подтвердите, что вы действительно тот, за кого себя выдаёте:</p>
+            <div class="icon">🏍️</div>
+            <h1>Добро пожаловать в гараж</h1>
+            <p class="text">Система обнаружила, что в гараже стоит легендарный <span class="highlight">ИЖ Юпитер</span>. Подтвердите, что вы его владелец:</p>
             
             <div class="verification-box">
-                <p>❓ Вы действительно брат того крутого парня, который создал этот сайт?</p>
-                <button class="verify-btn" onclick="startMain()">✅ Да, это я</button>
-                <button class="verify-btn" onclick="fakeReject()">❌ Нет, я просто мимо проходил</button>
+                <p>❓ Вы действительно двоюродный брат того парня, который создал этот сайт и чинит Юпитер по выходным?</p>
+                <button class="verify-btn" onclick="startMain()">✅ Да, это мой Юпитер</button>
+                <button class="verify-btn" onclick="fakeReject()">❌ Нет, это чужой мотоцикл</button>
             </div>
         </div>
 
-        <!-- Экран 2: Тарифы -->
+        <!-- Экран 2: Тарифы техосмотра -->
         <div id="mainScreen" style="display: none;">
-            <div class="icon">⚠️</div>
-            <h1>Подписка истекла</h1>
-            <p class="text">Ваш бесплатный пробный период <span class="highlight">ЖИЗНИ</span> закончился. Вы стали на год старше! Мама уже позвонила, чтобы поздравить. Выберите тариф для продолжения:</p>
+            <div class="icon">🔧</div>
+            <h1>СРОЧНО: Техосмотр просрочен</h1>
+            <p class="text">Ваш <span class="highlight">ИЖ Юпитер</span> стал на год старше, но всё ещё не едет. Выберите тариф обслуживания:</p>
             
             <div class="tariffs">
                 <button class="tariff-btn" onclick="showTerms('Стандарт')">
-                    <span class="tariff-title">🐢 Тариф "Стандарт"</span>
-                    <span class="tariff-desc">Живёте дальше. Бонусы: мама звонит каждый день, папа рассказывает шутки, которые вы слышали 100 раз.</span>
+                    <span class="tariff-title">🛢️ Тариф "Бензин и молитва"</span>
+                    <span class="tariff-desc">Юпитер заведётся с 15 раза. Бонусы: дядя просит прокатиться, тётя спрашивает "ты ещё на этом гремящем ездишь?".</span>
                 </button>
                 <button class="tariff-btn" onclick="showTerms('Премиум')">
-                    <span class="tariff-title">🍷 Тариф "Премиум"</span>
-                    <span class="tariff-desc">Всё как в стандарте, но теперь вы официально взрослый. Плюс: можете сами выбирать, какой фильм смотреть в воскресенье.</span>
+                    <span class="tariff-title">⚙️ Тариф "Новый карбюратор"</span>
+                    <span class="tariff-desc">Всё как в стандарте, но теперь Юпитер едет со скоростью 60 км/ч (и это уже успех). Плюс: цепь рвётся только раз в месяц.</span>
                 </button>
                 <button class="tariff-btn" onclick="vipError()">
-                    <span class="tariff-title">👑 Тариф "VIP"</span>
-                    <span class="tariff-desc">Бессмертие и статус любимого ребёнка. (Ошибка: Мама говорит, что я всё равно любимее).</span>
+                    <span class="tariff-title">🏆 Тариф "Harley-Davidson"</span>
+                    <span class="tariff-desc">Полный апгрейд мотоцикла. (Ошибка: дед сказал, что Юпитер — это навсегда, и он прав).</span>
                 </button>
             </div>
         </div>
 
-        <!-- Экран 3: Лицензия -->
+        <!-- Экран 3: Акт техосмотра -->
         <div id="termsScreen" style="display: none;">
-            <div class="icon">📜</div>
-            <h1>Семейный договор</h1>
-            <p class="text">Прочитайте внимательно. У вас есть <span class="highlight">10 секунд</span>, чтобы согласиться с нашей любовью:</p>
+            <div class="icon">📋</div>
+            <h1>Акт техосмотра</h1>
+            <p class="text">Прочитайте внимательно. У вас есть <span class="highlight">10 секунд</span>, чтобы согласиться с состоянием мотоцикла:</p>
             
             <div class="terms-list">
-                <p>1. Вы обещаете обнимать маму хотя бы два раза в неделю (ей будет очень приятно).</p>
-                <p>2. Вы соглашаетесь, что шутки папы на самом деле смешные (даже если нет, просто кивайте).</p>
-                <p>3. Вы признаёте, что я (ваш брат) всё-таки немного круче, но мы не будем говорить это родителям вслух.</p>
-                <p>4. Вы обязуетесь больше не воровать мою зарядку (или хотя бы возвращать её на место).</p>
-                <p>5. Вы обещаете есть суп, который приготовила мама, даже если не очень голодны.</p>
-                <p>6. Вы соглашаетесь, что в случае опасности (закончился чай или Wi-Fi) вы всегда можете позвонить мне.</p>
-                <p>7. Вы обязуетесь быть счастливым, потому что мы вас очень любим (даже когда вы бесите).</p>
-                <p>8. С днём рождения! Ты лучший брат на свете. (Но это между нами, не зазнавайся).</p>
+                <p>1. Вы подтверждаете, что Юпитер заводится не сразу, а с 15-го раза, и это нормально.</p>
+                <p>2. Вы соглашаетесь, что дядя всё ещё хочет прокатиться, даже после того как упал с него в 1998 году.</p>
+                <p>3. Вы признаёте, что цепь рвётся в самый неподходящий момент (обычно посреди поля).</p>
+                <p>4. Вы обязуетесь не воровать у меня гаечный ключ №13 (он всегда нужен именно когда его нет).</p>
+                <p>5. Вы обещаете, что звук выхлопа Юпитера слышен за 3 квартала, и это не баг, а фича.</p>
+                <p>6. Вы соглашаетесь, что в случае поломки (закончился бензин, порвалась цепь, кончилось терпение) вы всегда можете позвонить мне.</p>
+                <p>7. Вы обязуетесь любить этот мотоцикл, потому что он — часть нашей семьи (и часть нашего гаража).</p>
+                <p>8. С днём рождения! Ты лучший байкер гаража. (Но это между нами, дед не должен знать про Harley).</p>
             </div>
 
-            <div class="timer" id="timer">⏳ Размышление: 10 сек</div>
-            <button class="final-btn" id="acceptBtn" onclick="acceptTerms()">🔒 Принимаю любовь (заблокировано)</button>
-            <button class="refuse-btn" id="refuseBtn" onmouseover="runAway()" ontouchstart="runAway()">❌ Не хочу любить семью</button>
+            <div class="timer" id="timer">⏳ Техосмотр: 10 сек</div>
+            <button class="final-btn" id="acceptBtn" onclick="acceptTerms()">🔒 Подписать акт (заблокировано)</button>
+            <button class="refuse-btn" id="refuseBtn" onmouseover="runAway()" ontouchstart="runAway()">❌ Продать Юпитер</button>
             <button class="back-btn" onclick="goBack()">← Назад к тарифам</button>
         </div>
 
         <!-- Экран 4: Финал -->
         <div class="success-screen" id="successScreen">
-            <div class="icon">🎉</div>
-            <h2>Поздравляю, брат!</h2>
-            <p>Твоя подписка продлена ещё на 1 год.<br><br>Пользуйся жизнью на полную, помни, что мы всегда рядом и всегда за тебя.</p>
+            <div class="icon">🏁</div>
+            <h2>Техосмотр пройден!</h2>
+            <p>Твой Юпитер официально допущен к дороге ещё на 1 год.<br><br>Езжай аккуратно, помни, что мы всегда рядом и всегда поможем с цепью.</p>
             
             <div class="certificate">
                 <h3>🏆 СЕРТИФИКАТ</h3>
-                <p>Настоящим подтверждается, что вы успешно прошли все испытания и доказали, что достойны продолжать существование в нашей дружной семье.</p>
-                <p style="margin-top: 15px;"><b>Статус:</b> Официально крутой</p>
-                <p><b>Уровень:</b> Брат года</p>
-                <p><b>Достижение:</b> Выжил ещё один год</p>
-                <div class="stamp">ОДОБРЕНО СЕМЬЁЙ</div>
+                <p>Настоящим подтверждается, что мотоцикл ИЖ Юпитер успешно прошёл техосмотр и доказал, что достоин ехать дальше.</p>
+                <p style="margin-top: 15px;"><b>Статус:</b> Официально заводится</p>
+                <p><b>Уровень:</b> Двоюродный байкер года</p>
+                <p><b>Достижение:</b> Не развалился за год</p>
+                <div class="stamp">ОДОБРЕНО ГАРАЖОМ</div>
             </div>
         </div>
     </div>
@@ -255,7 +257,7 @@
         let timerInterval;
 
         function fakeReject() {
-            alert("⚠️ ОШИБКА: Система обнаружила обман. Вы всё равно брат, просто признайте это. Мама уже всё знает.");
+            alert("⚠️ ОШИБКА: Система обнаружила обман. Дед уже всё знает. Юпитер всё равно твой.");
         }
 
         function startMain() {
@@ -276,19 +278,19 @@
             const btn = document.getElementById('acceptBtn');
             
             btn.classList.remove('ready');
-            btn.innerText = '🔒 Принимаю любовь (заблокировано)';
+            btn.innerText = '🔒 Подписать акт (заблокировано)';
             
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 seconds--;
-                timer.innerText = `⏳ Размышление: ${seconds} сек`;
+                timer.innerText = `⏳ Техосмотр: ${seconds} сек`;
                 
                 if (seconds <= 0) {
                     clearInterval(timerInterval);
-                    timer.innerText = '✅ Время вышло. Любовь принята.';
+                    timer.innerText = '✅ Техосмотр завершён. Акт готов.';
                     timer.style.color = '#30d158';
                     btn.classList.add('ready');
-                    btn.innerText = '✅ Принимаю условия';
+                    btn.innerText = '✅ Подписать акт';
                 }
             }, 1000);
         }
@@ -302,7 +304,7 @@
             btn.style.top = y + 'px';
             btn.style.transition = 'all 0.3s ease';
             
-            const texts = ["Не-а", "Мы же любим тебя", "Куда собрался?", "Да ладно тебе", "Принимай любовь", "Мама расстроится"];
+            const texts = ["Не-а", "Юпитер не продаём", "Куда собрался?", "Дед не разрешит", "Подпиши акт", "Гараж расстроится"];
             btn.innerText = texts[Math.floor(Math.random() * texts.length)];
         }
 
@@ -313,7 +315,7 @@
         }
 
         function vipError() {
-            alert("❌ ОШИБКА: Недостаточно кармы для VIP. Мама сказала, что я всё равно любимее. Попробуйте тариф 'Стандарт'.");
+            alert("❌ ОШИБКА: Недостаточно кармы для Harley. Дед сказал, что Юпитер — это навсегда. Попробуйте тариф 'Бензин и молитва'.");
         }
 
         function acceptTerms() {
