@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚠️ СИСТЕМНАЯ ОШИБКА</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .alert-box {
+            background: #1c1c1e;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 30px 20px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+        .icon { font-size: 3em; margin-bottom: 15px; }
+        h1 { color: #ff453a; font-size: 1.5em; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .text { font-size: 1.1em; line-height: 1.5; margin-bottom: 25px; color: #aaa; }
+        .highlight { color: #fff; font-weight: bold; }
+        
+        .tariffs { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .tariff-btn {
+            background: #2c2c2e;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .tariff-btn:hover { background: #3a3a3c; transform: scale(1.02); }
+        .tariff-title { font-weight: bold; display: block; margin-bottom: 5px; }
+        .tariff-desc { font-size: 0.85em; color: #888; }
+
+        .terms-box {
+            display: none;
+            background: #000;
+            border: 1px solid #ff453a;
+            border-radius: 10px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: scroll;
+            text-align: left;
+            font-size: 0.85em;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .terms-box::-webkit-scrollbar { width: 5px; }
+        .terms-box::-webkit-scrollbar-thumb { background: #ff453a; border-radius: 5px; }
+
+        .final-btn {
+            display: none;
+            width: 100%;
+            padding: 15px;
+            background: #ff453a;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .final-btn:hover { background: #ff6961; }
+
+        .success-screen { display: none; }
+        .success-screen h2 { color: #30d158; font-size: 1.8em; margin-bottom: 15px; }
+        .success-screen p { color: #aaa; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <div class="alert-box">
+        <div id="mainScreen">
+            <div class="icon">⚠️</div>
+            <h1>Критическая ошибка</h1>
+            <p class="text">Внимание! Твой бесплатный пробный период <span class="highlight">ЖИЗНИ</span> истек. <br><br>Система обнаружила, что ты стал на год старше, но умнее не стал. Для продолжения дыхания выберите тарифный план:</p>
+            
+            <div class="tariffs">
+                <button class="tariff-btn" onclick="showTerms('Стандарт')">
+                    <span class="tariff-title">🐢 Тариф "Стандарт"</span>
+                    <span class="tariff-desc">Продление жизни. Бонусы: болит спина, лысеешь, зарплата не растет.</span>
+                </button>
+                <button class="tariff-btn" onclick="showTerms('Премиум')">
+                    <span class="tariff-title">🍷 Тариф "Премиум"</span>
+                    <span class="tariff-desc">Живешь дальше, но теперь каждый день находишь один новый седой волос.</span>
+                </button>
+                <button class="tariff-btn" onclick="vipError()">
+                    <span class="tariff-title">👑 Тариф "VIP (Бессмертие)"</span>
+                    <span class="tariff-desc">Полный доступ ко всем функциям Вселенной. (Требует проверку кармы)</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="termsScreen" style="display: none;">
+            <div class="icon">📜</div>
+            <h1>Лицензионное соглашение</h1>
+            <p class="text">Чтобы продолжить существование, прокрути вниз и прими условия:</p>
+            
+            <div class="terms-box" id="termsText">
+                <p>1. Нажимая кнопку ниже, вы подтверждаете, что являетесь главным разочарованием семьи, но мы всё равно вас любим (иногда).</p><br>
+                <p>2. Вы соглашаетесь с тем, что ваши шутки несмешные, а вкус в одежде как у бомжа, который нашел деньги на помойке.</p><br>
+                <p>3. Вы признаете, что ваш уровень харизмы находится на уровне плинтуса, но мы всё равно с вами дружим из жалости.</p><br>
+                <p>4. Система автоматически списывает с вас 1 год молодости в пользу брата (то есть меня). Возврату и обмену не подлежит.</p><br>
+                <p>5. В случае смерти по собственной дурости, семья не несет ответственности. Мы предупреждали.</p><br>
+                <p>6. Вы обязуетесь скинуть мне 1000 рублей на карту за моральный ущерб от вашего существования.</p><br>
+                <p>7. Если вы не согласны с пунктами 1-6, нажмите кнопку "Назад" и вернитесь в утробу матери.</p><br>
+                <p>8. С днём рождения, братишка. Ты лучший (пока что).</p><br>
+                <p>9. ...</p><br>
+                <p>10. ...</p><br>
+                <p>11. Ладно, хватит, листай вниз.</p>
+            </div>
+
+            <button class="final-btn" id="acceptBtn" onclick="acceptTerms()">✅ Прочитал, согласен, давай жить дальше</button>
+        </div>
+
+        <div class="success-screen" id="successScreen">
+            <div class="icon">🎉</div>
+            <h2>Поздравляю, брат!</h2>
+            <p>Твоя подписка продлена еще на 1 год. <br>Пользуйся жизнью, пока система не дала сбой. <br><br>А теперь иди сюда, обниму (и заберу 1000 рублей).</p>
+        </div>
+    </div>
+
+    <script>
+        let selectedTariff = '';
+
+        function showTerms(tariff) {
+            selectedTariff = tariff;
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('termsScreen').style.display = 'block';
+            
+            const termsBox = document.getElementById('termsText');
+            const acceptBtn = document.getElementById('acceptBtn');
+            
+            termsBox.onscroll = function() {
+                if (termsBox.scrollTop + termsBox.clientHeight >= termsBox.scrollHeight - 10) {
+                    acceptBtn.style.display = 'block';
+                }
+            };
+        }
+
+        function vipError() {
+            alert("❌ ОШИБКА 404: Недостаточно кармы для активации VIP. Ваша карма отрицательная. Попробуйте тариф 'Стандарт'.");
+        }
+
+        function acceptTerms() {
+            document.getElementById('termsScreen').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
