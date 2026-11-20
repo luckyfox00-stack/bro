@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏍️ ГАРАЖ: Техосмотр</title>
+    <title>⛏️ MINECRAFT: Обновление мира</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #1a1a1a;
-            color: #e0e0e0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #3d8c40;
+            background-image: 
+                linear-gradient(45deg, #4a9e4d 25%, transparent 25%),
+                linear-gradient(-45deg, #4a9e4d 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #4a9e4d 75%),
+                linear-gradient(-45deg, transparent 75%, #4a9e4d 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            color: #fff;
+            font-family: 'Courier New', monospace;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -17,44 +24,53 @@
             padding: 20px;
         }
         .alert-box {
-            background: #242424;
-            border: 2px solid #ff8c00;
-            border-radius: 16px;
+            background: #2d2d2d;
+            border: 4px solid #555;
+            border-radius: 4px;
             padding: 30px 20px;
             max-width: 450px;
             width: 100%;
-            box-shadow: 0 10px 40px rgba(255, 140, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
             text-align: center;
+            image-rendering: pixelated;
         }
         .icon { font-size: 3em; margin-bottom: 15px; }
-        h1 { color: #ff8c00; font-size: 1.5em; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
-        .text { font-size: 1.05em; line-height: 1.5; margin-bottom: 25px; color: #aaa; }
-        .highlight { color: #fff; font-weight: bold; }
+        h1 { 
+            color: #55ff55; 
+            font-size: 1.5em; 
+            margin-bottom: 15px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .text { font-size: 1.05em; line-height: 1.5; margin-bottom: 25px; color: #ccc; }
+        .highlight { color: #ffff55; font-weight: bold; text-shadow: 1px 1px 0 #000; }
         
         .tariffs { display: flex; flex-direction: column; gap: 12px; }
         .tariff-btn {
-            background: #2c2c2e;
-            border: 1px solid #444;
+            background: #4a4a4a;
+            border: 3px solid #666;
             color: #fff;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 4px;
             font-size: 1em;
             cursor: pointer;
             transition: all 0.2s;
             text-align: left;
+            font-family: 'Courier New', monospace;
         }
-        .tariff-btn:hover { background: #3a3a3c; transform: scale(1.02); }
-        .tariff-title { font-weight: bold; display: block; margin-bottom: 5px; color: #ff8c00; }
-        .tariff-desc { font-size: 0.85em; color: #888; }
+        .tariff-btn:hover { background: #5a5a5a; transform: scale(1.02); border-color: #888; }
+        .tariff-title { font-weight: bold; display: block; margin-bottom: 5px; color: #55ff55; }
+        .tariff-desc { font-size: 0.85em; color: #aaa; }
 
         .terms-list {
-            background: #000;
-            border: 1px solid #ff8c00;
-            border-radius: 10px;
+            background: #1a1a1a;
+            border: 3px solid #555;
+            border-radius: 4px;
             padding: 15px;
             text-align: left;
             font-size: 0.85em;
-            color: #999;
+            color: #ccc;
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -62,28 +78,31 @@
 
         .timer {
             font-size: 1.2em;
-            color: #ff8c00;
+            color: #ffff55;
             font-weight: bold;
             margin-bottom: 15px;
             min-height: 30px;
+            text-shadow: 1px 1px 0 #000;
         }
 
         .final-btn {
             width: 100%;
             padding: 15px;
-            background: #3a3a3c;
+            background: #4a4a4a;
             color: #666;
-            border: none;
-            border-radius: 10px;
+            border: 3px solid #666;
+            border-radius: 4px;
             font-size: 1.1em;
             font-weight: bold;
             cursor: not-allowed;
             transition: all 0.3s;
             margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
         }
         .final-btn.ready {
-            background: #ff8c00;
+            background: #55ff55;
             color: #000;
+            border-color: #33cc33;
             cursor: pointer;
             animation: pulse 1s infinite;
         }
@@ -95,69 +114,73 @@
             width: 100%;
             padding: 12px;
             background: none;
-            border: 1px solid #444;
+            border: 3px solid #666;
             color: #888;
-            border-radius: 10px;
+            border-radius: 4px;
             font-size: 0.95em;
             cursor: pointer;
             transition: all 0.3s;
             position: relative;
+            font-family: 'Courier New', monospace;
         }
 
         .success-screen { display: none; }
-        .success-screen h2 { color: #30d158; font-size: 1.8em; margin-bottom: 15px; }
-        .success-screen p { color: #aaa; font-size: 1.1em; line-height: 1.6; }
+        .success-screen h2 { color: #55ff55; font-size: 1.8em; margin-bottom: 15px; text-shadow: 2px 2px 0 #000; }
+        .success-screen p { color: #ccc; font-size: 1.1em; line-height: 1.6; }
 
         .back-btn {
             background: none;
-            border: 1px solid #444;
+            border: 3px solid #666;
             color: #888;
             padding: 8px 15px;
-            border-radius: 8px;
+            border-radius: 4px;
             margin-top: 15px;
             cursor: pointer;
             font-size: 0.9em;
+            font-family: 'Courier New', monospace;
         }
 
         .verification-box {
-            background: #000;
-            border: 1px solid #ff8c00;
-            border-radius: 10px;
+            background: #1a1a1a;
+            border: 3px solid #555;
+            border-radius: 4px;
             padding: 20px;
             margin-bottom: 20px;
         }
         .verification-box p {
-            color: #ff8c00;
+            color: #55ff55;
             font-size: 1em;
             margin-bottom: 15px;
         }
         .verify-btn {
-            background: #ff8c00;
+            background: #55ff55;
             color: #000;
-            border: none;
+            border: 3px solid #33cc33;
             padding: 12px 30px;
-            border-radius: 8px;
+            border-radius: 4px;
             font-size: 1em;
             cursor: pointer;
             margin: 5px;
             font-weight: bold;
+            font-family: 'Courier New', monospace;
         }
 
         .certificate {
-            background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
-            border: 3px solid #fff;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #55ff55 0%, #33cc33 100%);
+            border: 4px solid #fff;
+            border-radius: 4px;
             padding: 25px;
             margin-top: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .certificate h3 {
-            color: #fff;
+            color: #000;
             font-size: 1.3em;
             margin-bottom: 10px;
+            text-shadow: none;
         }
         .certificate p {
-            color: #fff;
+            color: #000;
             font-size: 1em;
             line-height: 1.5;
             margin-bottom: 5px;
@@ -165,9 +188,9 @@
         .stamp {
             display: inline-block;
             background: #000;
-            color: #ff8c00;
+            color: #55ff55;
             padding: 5px 15px;
-            border-radius: 5px;
+            border-radius: 4px;
             font-size: 0.9em;
             margin-top: 10px;
             transform: rotate(-5deg);
@@ -177,77 +200,77 @@
 </head>
 <body>
     <div class="alert-box">
-        <!-- Экран 1: Вход в гараж -->
+        <!-- Экран 1: Проверка игрока -->
         <div id="verifyScreen">
-            <div class="icon">🏍️</div>
-            <h1>Добро пожаловать в гараж</h1>
-            <p class="text">Система обнаружила, что в гараже стоит легендарный <span class="highlight">ИЖ Юпитер</span>. Подтвердите, что вы его владелец:</p>
+            <div class="icon">⛏️</div>
+            <h1>Проверка игрока</h1>
+            <p class="text">Система обнаружила попытку входа на сервер. Подтвердите, что вы действительно тот, за кого себя выдаёте:</p>
             
             <div class="verification-box">
-                <p>❓ Вы действительно двоюродный брат того парня, который создал этот сайт и чинит Юпитер по выходным?</p>
-                <button class="verify-btn" onclick="startMain()">✅ Да, это мой Юпитер</button>
-                <button class="verify-btn" onclick="fakeReject()">❌ Нет, это чужой мотоцикл</button>
+                <p>❓ Вы действительно двоюродный брат того парня, который создал этот Minecraft-мир?</p>
+                <button class="verify-btn" onclick="startMain()">✅ Да, это я</button>
+                <button class="verify-btn" onclick="fakeReject()">❌ Нет, я просто зомби</button>
             </div>
         </div>
 
-        <!-- Экран 2: Тарифы техосмотра -->
+        <!-- Экран 2: Тарифы обновления -->
         <div id="mainScreen" style="display: none;">
-            <div class="icon">🔧</div>
-            <h1>СРОЧНО: Техосмотр просрочен</h1>
-            <p class="text">Ваш <span class="highlight">ИЖ Юпитер</span> стал на год старше, но всё ещё не едет. Выберите тариф обслуживания:</p>
+            <div class="icon">🌍</div>
+            <h1>Мир устарел!</h1>
+            <p class="text">Ваш Minecraft-мир стал на год старше! Криперы постарели, алмазы заржавели. Выберите пакет обновления:</p>
             
             <div class="tariffs">
-                <button class="tariff-btn" onclick="showTerms('Стандарт')">
-                    <span class="tariff-title">🛢️ Тариф "Бензин и молитва"</span>
-                    <span class="tariff-desc">Юпитер заведётся с 15 раза. Бонусы: дядя просит прокатиться, тётя спрашивает "ты ещё на этом гремящем ездишь?".</span>
+                <button class="tariff-btn" onclick="showTerms('Деревянная кирка')">
+                    <span class="tariff-title">🪵 Тариф "Деревянная кирка"</span>
+                    <span class="tariff-desc">Базовое обновление. Бонусы: копаете медленно, криперы всё равно взрываются, зомби стучат в дверь ночью.</span>
                 </button>
-                <button class="tariff-btn" onclick="showTerms('Премиум')">
-                    <span class="tariff-title">⚙️ Тариф "Новый карбюратор"</span>
-                    <span class="tariff-desc">Всё как в стандарте, но теперь Юпитер едет со скоростью 60 км/ч (и это уже успех). Плюс: цепь рвётся только раз в месяц.</span>
+                <button class="tariff-btn" onclick="showTerms('Алмазная кирка')">
+                    <span class="tariff-title">💎 Тариф "Алмазная кирка"</span>
+                    <span class="tariff-desc">Всё как в стандарте, но теперь вы копаете быстрее. Плюс: можете построить дом из алмазов (но крипер всё равно взорвёт).</span>
                 </button>
                 <button class="tariff-btn" onclick="vipError()">
-                    <span class="tariff-title">🏆 Тариф "Harley-Davidson"</span>
-                    <span class="tariff-desc">Полный апгрейд мотоцикла. (Ошибка: дед сказал, что Юпитер — это навсегда, и он прав).</span>
+                    <span class="tariff-title">👑 Тариф "Незеритовый"</span>
+                    <span class="tariff-desc">Полный апгрейд. (Ошибка: не хватает опыта. Нужно ещё 1000 уровней. Попробуйте убить Эндер-дракона).</span>
                 </button>
             </div>
         </div>
 
-        <!-- Экран 3: Акт техосмотра -->
+        <!-- Экран 3: Правила сервера -->
         <div id="termsScreen" style="display: none;">
-            <div class="icon">📋</div>
-            <h1>Акт техосмотра</h1>
-            <p class="text">Прочитайте внимательно. У вас есть <span class="highlight">10 секунд</span>, чтобы согласиться с состоянием мотоцикла:</p>
+            <div class="icon">📜</div>
+            <h1>Правила сервера</h1>
+            <p class="text">Прочитайте внимательно. У вас есть <span class="highlight">10 секунд</span>, чтобы согласиться с правилами:</p>
             
             <div class="terms-list">
-                <p>1. Вы подтверждаете, что Юпитер заводится не сразу, а с 15-го раза, и это нормально.</p>
-                <p>2. Вы соглашаетесь, что дядя всё ещё хочет прокатиться, даже после того как упал с него в 1998 году.</p>
-                <p>3. Вы признаёте, что цепь рвётся в самый неподходящий момент (обычно посреди поля).</p>
-                <p>4. Вы обязуетесь не воровать у меня гаечный ключ №13 (он всегда нужен именно когда его нет).</p>
-                <p>5. Вы обещаете, что звук выхлопа Юпитера слышен за 3 квартала, и это не баг, а фича.</p>
-                <p>6. Вы соглашаетесь, что в случае поломки (закончился бензин, порвалась цепь, кончилось терпение) вы всегда можете позвонить мне.</p>
-                <p>7. Вы обязуетесь любить этот мотоцикл, потому что он — часть нашей семьи (и часть нашего гаража).</p>
-                <p>8. С днём рождения! Ты лучший байкер гаража. (Но это между нами, дед не должен знать про Harley).</p>
+                <p>1. Вы подтверждаете, что не будете воровать мои алмазы из сундука (даже если очень хочется).</p>
+                <p>2. Вы соглашаетесь, что ставить TNT рядом с моим домом — это плохая идея (я уже проверял).</p>
+                <p>3. Вы признаёте, что криперы — это не баг, а фича (и они всегда появляются, когда вы несёте алмазы).</p>
+                <p>4. Вы обязуетесь не убегать от зомби в мою сторону (я не ваш щит).</p>
+                <p>5. Вы обещаете делиться едой, когда у вас много, а у меня голод (особенно ночью).</p>
+                <p>6. Вы соглашаетесь, что в случае опасности (Эндермен, Визер, конец мира) вы всегда можете позвать меня на помощь.</p>
+                <p>7. Вы обязуетесь любить этот мир, потому что мы строим его вместе (и потому что я уже потратил 100 часов на ферму).</p>
+                <p>8. С днём рождения! Ты лучший игрок на сервере. (Но это между нами, другие игроки не должны знать).</p>
             </div>
 
-            <div class="timer" id="timer">⏳ Техосмотр: 10 сек</div>
-            <button class="final-btn" id="acceptBtn" onclick="acceptTerms()">🔒 Подписать акт (заблокировано)</button>
-            <button class="refuse-btn" id="refuseBtn" onmouseover="runAway()" ontouchstart="runAway()">❌ Продать Юпитер</button>
+            <div class="timer" id="timer">⏳ Загрузка правил: 10 сек</div>
+            <button class="final-btn" id="acceptBtn" onclick="acceptTerms()">🔒 Принять правила (заблокировано)</button>
+            <button class="refuse-btn" id="refuseBtn" onmouseover="runAway()" ontouchstart="runAway()">❌ Выйти с сервера</button>
             <button class="back-btn" onclick="goBack()">← Назад к тарифам</button>
         </div>
 
         <!-- Экран 4: Финал -->
         <div class="success-screen" id="successScreen">
-            <div class="icon">🏁</div>
-            <h2>Техосмотр пройден!</h2>
-            <p>Твой Юпитер официально допущен к дороге ещё на 1 год.<br><br>Езжай аккуратно, помни, что мы всегда рядом и всегда поможем с цепью.</p>
+            <div class="icon">🏆</div>
+            <h2>Мир обновлён!</h2>
+            <p>Твой Minecraft-мир официально обновлён ещё на 1 год.<br><br>Играй аккуратно, помни, что я всегда рядом и всегда поможем отбиться от криперов.</p>
             
             <div class="certificate">
-                <h3>🏆 СЕРТИФИКАТ</h3>
-                <p>Настоящим подтверждается, что мотоцикл ИЖ Юпитер успешно прошёл техосмотр и доказал, что достоин ехать дальше.</p>
-                <p style="margin-top: 15px;"><b>Статус:</b> Официально заводится</p>
-                <p><b>Уровень:</b> Двоюродный байкер года</p>
-                <p><b>Достижение:</b> Не развалился за год</p>
-                <div class="stamp">ОДОБРЕНО ГАРАЖОМ</div>
+                <h3>🏆 СЕРТИФИКАТ ИГРОКА</h3>
+                <p>Настоящим подтверждается, что вы успешно прошли все испытания и доказали, что достойны продолжать играть на нашем сервере.</p>
+                <p style="margin-top: 15px;"><b>Статус:</b> Официально крутой игрок</p>
+                <p><b>Уровень:</b> Двоюродный брат года</p>
+                <p><b>Достижение:</b> Выжил в Minecraft ещё год</p>
+                <div class="stamp">ОДОБРЕНО СЕРВЕРОМ</div>
             </div>
         </div>
     </div>
@@ -257,7 +280,7 @@
         let timerInterval;
 
         function fakeReject() {
-            alert("⚠️ ОШИБКА: Система обнаружила обман. Дед уже всё знает. Юпитер всё равно твой.");
+            alert("⚠️ ОШИБКА: Система обнаружила обман. Зомби не умеют нажимать кнопки. Вы всё равно брат, просто признайте это.");
         }
 
         function startMain() {
@@ -278,19 +301,19 @@
             const btn = document.getElementById('acceptBtn');
             
             btn.classList.remove('ready');
-            btn.innerText = '🔒 Подписать акт (заблокировано)';
+            btn.innerText = '🔒 Принять правила (заблокировано)';
             
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 seconds--;
-                timer.innerText = `⏳ Техосмотр: ${seconds} сек`;
+                timer.innerText = `⏳ Загрузка правил: ${seconds} сек`;
                 
                 if (seconds <= 0) {
                     clearInterval(timerInterval);
-                    timer.innerText = '✅ Техосмотр завершён. Акт готов.';
-                    timer.style.color = '#30d158';
+                    timer.innerText = '✅ Правила загружены. Можно принимать.';
+                    timer.style.color = '#55ff55';
                     btn.classList.add('ready');
-                    btn.innerText = '✅ Подписать акт';
+                    btn.innerText = '✅ Принять правила';
                 }
             }, 1000);
         }
@@ -304,7 +327,7 @@
             btn.style.top = y + 'px';
             btn.style.transition = 'all 0.3s ease';
             
-            const texts = ["Не-а", "Юпитер не продаём", "Куда собрался?", "Дед не разрешит", "Подпиши акт", "Гараж расстроится"];
+            const texts = ["Не-а", "Мы же играем вместе", "Куда собрался?", "Криперы грустят", "Принимай правила", "Сервер расстроится"];
             btn.innerText = texts[Math.floor(Math.random() * texts.length)];
         }
 
@@ -315,7 +338,7 @@
         }
 
         function vipError() {
-            alert("❌ ОШИБКА: Недостаточно кармы для Harley. Дед сказал, что Юпитер — это навсегда. Попробуйте тариф 'Бензин и молитва'.");
+            alert("❌ ОШИБКА: Недостаточно опыта для незеритового тарифа. Нужно ещё 1000 уровней. Попробуйте убить Эндер-дракона или выберите 'Алмазная кирка'.");
         }
 
         function acceptTerms() {
