@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ СИСТЕМНАЯ ОШИБКА</title>
+    <title>⚠️ СИСТЕМНОЕ УВЕДОМЛЕНИЕ</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -79,6 +79,7 @@
             font-weight: bold;
             cursor: not-allowed;
             transition: all 0.3s;
+            margin-bottom: 10px;
         }
         .final-btn.ready {
             background: #ff453a;
@@ -88,6 +89,19 @@
         }
         @keyframes pulse {
             50% { transform: scale(1.03); }
+        }
+
+        .refuse-btn {
+            width: 100%;
+            padding: 12px;
+            background: none;
+            border: 1px solid #444;
+            color: #888;
+            border-radius: 10px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .success-screen { display: none; }
@@ -104,62 +118,111 @@
             cursor: pointer;
             font-size: 0.9em;
         }
+
+        .verification-box {
+            background: #000;
+            border: 1px solid #007aff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .verification-box p {
+            color: #007aff;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        .verify-btn {
+            background: #007aff;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="alert-box">
-        <div id="mainScreen">
+        <!-- Экран 1: Проверка личности -->
+        <div id="verifyScreen">
+            <div class="icon">🔍</div>
+            <h1>Проверка личности</h1>
+            <p class="text">Система обнаружила попытку доступа к вашему аккаунту жизни. Подтвердите, что вы действительно тот, за кого себя выдаёте:</p>
+            
+            <div class="verification-box">
+                <p>❓ Вы действительно брат того крутого парня, который создал этот сайт?</p>
+                <button class="verify-btn" onclick="startMain()">✅ Да, это я</button>
+                <button class="verify-btn" onclick="fakeReject()">❌ Нет, я самозванец</button>
+            </div>
+        </div>
+
+        <!-- Экран 2: Тарифы -->
+        <div id="mainScreen" style="display: none;">
             <div class="icon">⚠️</div>
-            <h1>Критическая ошибка</h1>
-            <p class="text">Внимание! Твой бесплатный пробный период <span class="highlight">ЖИЗНИ</span> истек. <br><br>Система обнаружила, что ты стал на год старше, но умнее не стал. Для продолжения дыхания выберите тарифный план:</p>
+            <h1>Подписка истекла</h1>
+            <p class="text">Ваш бесплатный пробный период <span class="highlight">ЖИЗНИ</span> закончился. Вы стали на год старше, но это не точно. Выберите тариф для продолжения:</p>
             
             <div class="tariffs">
                 <button class="tariff-btn" onclick="showTerms('Стандарт')">
                     <span class="tariff-title">🐢 Тариф "Стандарт"</span>
-                    <span class="tariff-desc">Продление жизни. Бонусы: болит спина, лысеешь, зарплата не растет.</span>
+                    <span class="tariff-desc">Живёте дальше. Бонусы: иногда болит колено, забываете зачем зашли в комнату.</span>
                 </button>
                 <button class="tariff-btn" onclick="showTerms('Премиум')">
                     <span class="tariff-title">🍷 Тариф "Премиум"</span>
-                    <span class="tariff-desc">Живешь дальше, но теперь каждый день находишь один новый седой волос.</span>
+                    <span class="tariff-desc">Всё как в стандарте, но теперь вы официально считаете себя взрослым (спойлер: нет).</span>
                 </button>
                 <button class="tariff-btn" onclick="vipError()">
-                    <span class="tariff-title">👑 Тариф "VIP (Бессмертие)"</span>
-                    <span class="tariff-desc">Полный доступ ко всем функциям Вселенной. (Требует проверку кармы)</span>
+                    <span class="tariff-title">👑 Тариф "VIP"</span>
+                    <span class="tariff-desc">Бессмертие, бесконечная энергия, идеальная память. (Требуется карма 9000+)</span>
                 </button>
             </div>
         </div>
 
+        <!-- Экран 3: Лицензия -->
         <div id="termsScreen" style="display: none;">
             <div class="icon">📜</div>
-            <h1>Лицензионное соглашение</h1>
-            <p class="text">Внимательно изучи условия. У тебя есть <span class="highlight">15 секунд</span> на осмысление своей ничтожности:</p>
+            <h1>Условия использования</h1>
+            <p class="text">Прочитайте внимательно. У вас есть <span class="highlight">10 секунд</span> на принятие своей судьбы:</p>
             
             <div class="terms-list">
-                <p>1. Нажимая кнопку ниже, вы подтверждаете, что являетесь главным разочарованием семьи, но мы всё равно вас любим (иногда).</p>
-                <p>2. Вы соглашаетесь с тем, что ваши шутки несмешные, а вкус в одежде как у бомжа, который нашел деньги на помойке.</p>
-                <p>3. Вы признаете, что ваш уровень харизмы находится на уровне плинтуса, но мы всё равно с вами дружим из жалости.</p>
-                <p>4. Система автоматически списывает с вас 1 год молодости в пользу брата (то есть меня). Возврату и обмену не подлежит.</p>
-                <p>5. В случае смерти по собственной дурости, семья не несет ответственности. Мы предупреждали.</p>
-                <p>6. Вы обязуетесь скинуть мне 1000 рублей на карту за моральный ущерб от вашего существования.</p>
-                <p>7. Если вы не согласны с пунктами 1-6, нажмите "Назад" и вернитесь в утробу матери.</p>
-                <p>8. С днём рождения, братишка. Ты лучший (пока что).</p>
+                <p>1. Вы подтверждаете, что иногда говорите глупости, но это нормально — все так делают.</p>
+                <p>2. Вы соглашаетесь, что ваш брат (я) всё-таки круче вас, но мы это не афишируем.</p>
+                <p>3. Вы обязуетесь хотя бы раз в неделю звонить родителям, иначе система пришлёт напоминание.</p>
+                <p>4. Вы признаёте, что едите слишком много фастфуда, но обещаете иногда есть овощи (хотя бы в пицце).</p>
+                <p>5. Вы соглашаетесь, что ваши мемы иногда несмешные, но мы всё равно ставим лайки из вежливости.</p>
+                <p>6. В случае критической ситуации (например, закончился чай) вы имеете право позвонить брату в любое время.</p>
+                <p>7. Вы обязуетесь быть счастливым, потому что жизнь слишком коротка для грусти (и для этого сайта).</p>
+                <p>8. С днём рождения! Ты классный, и я рад, что ты есть. (Но это между нами, не рассказывай никому).</p>
             </div>
 
-            <div class="timer" id="timer">⏳ Осмысление: 15 сек</div>
-            <button class="final-btn" id="acceptBtn" onclick="acceptTerms()">🔒 Согласен (заблокировано)</button>
+            <div class="timer" id="timer">⏳ Размышление: 10 сек</div>
+            <button class="final-btn" id="acceptBtn" onclick="acceptTerms()">🔒 Принимаю условия (заблокировано)</button>
+            <button class="refuse-btn" id="refuseBtn" onmouseover="runAway()" ontouchstart="runAway()">❌ Отказаться от жизни</button>
             <button class="back-btn" onclick="goBack()">← Назад к тарифам</button>
         </div>
 
+        <!-- Экран 4: Финал -->
         <div class="success-screen" id="successScreen">
             <div class="icon">🎉</div>
             <h2>Поздравляю, брат!</h2>
-            <p>Твоя подписка продлена еще на 1 год.<br><br>Пользуйся жизнью, пока система не дала сбой.<br><br>А теперь иди сюда, обниму (и заберу 1000 рублей) 💸</p>
+            <p>Твоя подписка продлена ещё на 1 год.<br><br>Пользуйся жизнью на полную, помни, что я всегда рядом (даже если иногда бесю).<br><br>А теперь иди сюда, обниму! 🤗</p>
         </div>
     </div>
 
     <script>
         let selectedTariff = '';
         let timerInterval;
+
+        function fakeReject() {
+            alert("⚠️ ОШИБКА: Система обнаружила обман. Вы всё равно брат, просто признайте это. Попробуйте ещё раз.");
+        }
+
+        function startMain() {
+            document.getElementById('verifyScreen').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'block';
+        }
 
         function showTerms(tariff) {
             selectedTariff = tariff;
@@ -169,26 +232,39 @@
         }
 
         function startTimer() {
-            let seconds = 15;
+            let seconds = 10;
             const timer = document.getElementById('timer');
             const btn = document.getElementById('acceptBtn');
             
             btn.classList.remove('ready');
-            btn.innerText = '🔒 Согласен (заблокировано)';
+            btn.innerText = '🔒 Принимаю условия (заблокировано)';
             
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 seconds--;
-                timer.innerText = `⏳ Осмысление: ${seconds} сек`;
+                timer.innerText = `⏳ Размышление: ${seconds} сек`;
                 
                 if (seconds <= 0) {
                     clearInterval(timerInterval);
-                    timer.innerText = '✅ Время вышло. Ты принял свою судьбу.';
+                    timer.innerText = '✅ Время вышло. Судьба принята.';
                     timer.style.color = '#30d158';
                     btn.classList.add('ready');
-                    btn.innerText = '✅ Прочитал, согласен, давай жить дальше';
+                    btn.innerText = '✅ Принимаю условия';
                 }
             }, 1000);
+        }
+
+        function runAway() {
+            const btn = document.getElementById('refuseBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.transition = 'all 0.3s ease';
+            
+            const texts = ["Не-а", "Не получится", "Живи!", "Да ладно тебе", "Принимай условия"];
+            btn.innerText = texts[Math.floor(Math.random() * texts.length)];
         }
 
         function goBack() {
@@ -198,7 +274,7 @@
         }
 
         function vipError() {
-            alert("❌ ОШИБКА 404: Недостаточно кармы для активации VIP. Ваша карма отрицательная. Попробуйте тариф 'Стандарт'.");
+            alert("❌ ОШИБКА: Недостаточно кармы для VIP. Ваша карма: 404. Попробуйте тариф 'Стандарт' или станьте лучше человеком.");
         }
 
         function acceptTerms() {
