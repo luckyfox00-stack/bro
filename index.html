@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Днём Рождения! 🎉</title>
+    <title>System Locked 🔒</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #1a1a2e;
+            background: #0d1117;
             color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Courier New', Courier, monospace; /* Моноширинный шрифт как в терминале */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -17,75 +17,123 @@
             padding: 20px;
         }
         .container {
-            background: #16213e;
-            border: 2px solid #0f3460;
-            border-radius: 20px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
             padding: 30px 20px;
-            max-width: 400px;
+            max-width: 420px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
-        h1 { color: #e94560; font-size: 1.8em; margin-bottom: 20px; }
+        h1 { color: #58a6ff; font-size: 1.5em; margin-bottom: 10px; }
+        .subtitle { color: #8b949e; font-size: 0.95em; margin-bottom: 25px; line-height: 1.5; }
         
-        .video-box {
-            width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 3px solid #0f3460;
-            margin-bottom: 25px;
-            background: #000;
+        .code-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
         }
+        .code-inputs input {
+            width: 100%;
+            padding: 15px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #39d353; /* Зеленый цвет как в терминале */
+            font-size: 1.1em;
+            text-align: center;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+            transition: border 0.3s;
+        }
+        .code-inputs input:focus { border-color: #58a6ff; }
+        .code-inputs input::placeholder { color: #484f58; }
 
         .btn {
-            background: #e94560;
+            background: #238636;
             color: #fff;
             border: none;
             padding: 15px 30px;
             font-size: 1.1em;
-            border-radius: 50px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background 0.2s;
             width: 100%;
+            font-family: 'Courier New', Courier, monospace;
         }
-        .btn:hover { transform: scale(1.05); background: #ff2e63; }
+        .btn:hover { transform: scale(1.02); background: #2ea043; }
+
+        .error-msg {
+            color: #f85149;
+            margin-top: 15px;
+            font-size: 0.9em;
+            display: none;
+            font-weight: bold;
+        }
+
+        .video-box {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+            margin-bottom: 25px;
+            background: #000;
+        }
 
         .congrats { display: none; animation: fadeIn 1s; }
         @keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
 
         .certificate {
-            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
-            border: 3px solid #e94560;
-            border-radius: 15px;
-            padding: 25px 15px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-left: 4px solid #39d353;
+            border-radius: 8px;
+            padding: 20px 15px;
             margin-top: 20px;
+            text-align: left;
         }
-        .certificate h3 { color: #e94560; font-size: 1.4em; margin-bottom: 15px; }
-        .certificate p { color: #ccc; font-size: 1em; line-height: 1.6; margin-bottom: 10px; }
+        .certificate h3 { color: #39d353; font-size: 1.2em; margin-bottom: 15px; text-align: center; }
+        .certificate p { color: #c9d1d9; font-size: 0.95em; line-height: 1.6; margin-bottom: 10px; }
         .stamp {
-            display: inline-block;
-            background: #e94560;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 5px;
-            font-size: 1em;
+            display: block;
+            text-align: center;
             margin-top: 15px;
-            transform: rotate(-3deg);
+            color: #58a6ff;
             font-weight: bold;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ЭКРАН 1: Видео и кнопка -->
-        <div id="screen1">
-            <h1>Специально для тебя! 🎁</h1>
+        
+        <!-- ЭКРАН 1: Ввод кодов -->
+        <div id="lockScreen">
+            <h1>⚠️ SYSTEM LOCKED</h1>
+            <p class="subtitle">Подарок custom для братишки-айтишника!<br>Введи 3 кода доступа, чтобы разблокировать систему:</p>
+            
+            <div class="code-inputs">
+                <input type="text" id="code1" placeholder="> код №1" autocomplete="off">
+                <input type="text" id="code2" placeholder="> код №2" autocomplete="off">
+                <input type="text" id="code3" placeholder="> код №3" autocomplete="off">
+            </div>
+
+            <button class="btn" onclick="checkCodes()">🔓 sudo execute gift.sh</button>
+            <p class="error-msg" id="errorMsg">❌ Access Denied! Неверные коды. Проверь записки.</p>
+        </div>
+
+        <!-- ЭКРАН 2: Видео и поздравление -->
+        <div class="congrats" id="mainScreen" style="display: none;">
+            <h1 style="color: #39d353;">✅ Access Granted!</h1>
+            <p class="subtitle" style="color: #fff; margin-bottom: 20px;">Система разблокирована. С Днём Рождения! 🥳</p>
             
             <div class="video-box">
                 <!-- 👇 ВСТАВЬ СЮДА НОМЕР ВИДЕО ИЗ TIKTOK 👇 -->
                 <iframe 
-                    src="https://www.tiktok.com/embed/7611663377177267469" 
+                    src="https://www.tiktok.com/embed/7384920192837465345" 
                     width="100%" 
                     height="550" 
                     frameborder="0" 
@@ -93,29 +141,55 @@
                 </iframe>
             </div>
 
-            <button class="btn" onclick="showCongrats()">🎉 Получить поздравление</button>
-        </div>
-
-        <!-- ЭКРАН 2: Поздравление -->
-        <div class="congrats" id="screen2">
-            <h1>С Днём Рождения! 🥳</h1>
-            <p style="color: #ccc; margin-bottom: 20px;">Брат, желаю тебе крутых моментов, лёгких решений и чтобы всё задуманное сбывалось!</p>
-            
             <div class="certificate">
-                <h3>🏆 СЕРТИФИКАТ</h3>
-                <p>Настоящим подтверждается, что ты —</p>
-                <p style="color: #fff; font-size: 1.2em; font-weight: bold; margin: 15px 0;">ЛУЧШИЙ БРАТ</p>
-                <p>Спасибо, что ты есть. Расти, развивайся и будь счастлив!</p>
-                <div class="stamp"></div>
+                <h3>🏆 СЕРТИФИКАТ АДМИНИСТРАТОРА</h3>
+                <p>Настоящим подтверждается, что пользователь успешно взломал этот сайт, обошёл firewall и доказал, что он —</p>
+                <p style="color: #fff; font-size: 1.1em; font-weight: bold; margin: 15px 0; text-align: center; border: 1px dashed #30363d; padding: 10px;">ЛУЧШИЙ ДВОЮРОДНЫЙ БРАТ И КРУТОЙ АЙТИШНИК</p>
+                <p>Желаю тебе минимум багов, максимум аптайма и чтобы код всегда компилировался с первого раза!</p>
+                <div class="stamp">[ SYSTEM APPROVED ]</div>
             </div>
         </div>
     </div>
 
     <script>
-        function showCongrats() {
-            document.getElementById('screen1').style.display = 'none';
-            document.getElementById('screen2').style.display = 'block';
+        // ==========================================
+        // ⚙️ НАСТРОЙКИ (КОДЫ УЖЕ ВШИТЫ СЮДА!)
+        // ==========================================
+        const CODE_1 = "sudo"; 
+        const CODE_2 = "root"; 
+        const CODE_3 = "404"; 
+        // ==========================================
+
+        function checkCodes() {
+            const input1 = document.getElementById('code1').value.trim().toLowerCase();
+            const input2 = document.getElementById('code2').value.trim().toLowerCase();
+            const input3 = document.getElementById('code3').value.trim().toLowerCase();
+
+            if (input1 === CODE_1 && input2 === CODE_2 && input3 === CODE_3) {
+                document.getElementById('lockScreen').style.display = 'none';
+                document.getElementById('mainScreen').style.display = 'block';
+            } else {
+                const errorMsg = document.getElementById('errorMsg');
+                errorMsg.style.display = 'block';
+                
+                document.querySelector('.code-inputs').style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    document.querySelector('.code-inputs').style.animation = 'none';
+                }, 500);
+            }
         }
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                50% { transform: translateX(10px); }
+                75% { transform: translateX(-10px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
